@@ -1,18 +1,26 @@
 package com.example.demo.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Employee {
-    private long id;
+
+    @Id
+    private Integer id;
+
     private String name;
     private String email;
     private String BirthDay;
     private long BadgeNumber;
     private String image;
 
+
     public long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -48,7 +56,7 @@ public class Employee {
         BadgeNumber = badgeNumber;
     }
 
-    public Employee(long id, String name, String email, String birthDay, long badgeNumber, String image) {
+    public Employee(int id, String name, String email, String birthDay, long badgeNumber, String image) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -56,6 +64,8 @@ public class Employee {
         BadgeNumber = badgeNumber;
         this.image = image;
     }
+
+    public Employee() { }
 
     public String getImage() {
         return image;

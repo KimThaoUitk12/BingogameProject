@@ -1,13 +1,28 @@
 package com.example.demo.controller;
 
+import  com.example.demo.repository.EmployeeRepository;
 import com.example.demo.model.Employee;
+import com.example.demo.repository.EmployeeRepository;
+import com.example.demo.service.EmployeeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class EmployeeController {
+
+    private EmployeeService employeeService;
+
+    public EmployeeController(EmployeeService employeeService) {
+        this.employeeService = employeeService;
+    }
+
     private List<Employee> list;
 
     @RequestMapping("/")
@@ -16,8 +31,9 @@ public class EmployeeController {
     }
 
     @RequestMapping(value = "/welcome")
-    public List<Employee> welcome(){
-        return list;
+    public @ResponseBody
+    Optional<Iterable<Employee>> welcome(){
+        return Optional.of(employeeService.findAll());
     }
 
     @RequestMapping(value = "/delEmp/{id}", method = RequestMethod.DELETE)
