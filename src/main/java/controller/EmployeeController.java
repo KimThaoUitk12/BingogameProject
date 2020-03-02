@@ -9,7 +9,13 @@ import java.util.List;
 @RestController
 public class EmployeeController {
     private List<Employee> list;
-    @RequestMapping("/welcome")
+
+    @RequestMapping("/")
+    public String home(){
+        return "Hello World!";
+    }
+
+    @RequestMapping(value = "/welcome")
     public List<Employee> welcome(){
         return list;
     }
