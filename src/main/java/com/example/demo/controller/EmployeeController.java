@@ -1,6 +1,6 @@
-package controller;
+package com.example.demo.controller;
 
-import model.Employee;
+import com.example.demo.model.Employee;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
