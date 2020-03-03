@@ -3,9 +3,11 @@ package com.example.demo.service;
 import com.example.demo.model.Employee;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface EmployeeService {
-    Optional<Employee> findById(Integer id);
+    public void  updateById(int id, Employee emp);
+    public Employee findById(int id);
     public List<Employee> findAll();
+    public void addEmployee(Employee emp);
+    public void delEmployee(int id);
 }

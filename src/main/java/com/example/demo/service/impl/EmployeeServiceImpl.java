@@ -16,12 +16,40 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 
     @Override
-    public Optional<Employee> findById(Integer id) {
-        return employeeRepository.findById(id);
+    public void updateById(int id, Employee emp) {
+       Employee e=new EmployeeServiceImpl().findById(id);
+       if(e!=null){
+           e.setId(emp.getId());
+           e.setBadgeNumber(emp.getBadgeNumber());
+           e.setBirthDay(emp.getBirthDay());
+           e.setEmail(emp.getEmail());
+           e.setName(emp.getName());
+           e.setImage(emp.getImage());
+           employeeRepository.save(e);
+       }
+
+    }
+
+    @Override
+    public Employee findById(int id) {
+        Optional<Employee> employee = employeeRepository.findById(id);
+        return employee.isPresent()?employee.get():null;
     }
 
     @Override
     public List<Employee> findAll() {
         return (List<Employee>) employeeRepository.findAll();
     }
+
+    @Override
+    public void addEmployee(Employee emp) {
+        employeeRepository.save(emp);
+    }
+
+    @Override
+    public void delEmployee(int id) {
+        employeeRepository.deleteById(id);
+    }
+
+
 }

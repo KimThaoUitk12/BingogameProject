@@ -1,12 +1,15 @@
 package com.example.demo.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Employee {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String name;
@@ -16,7 +19,7 @@ public class Employee {
     private String image;
 
 
-    public long getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -56,7 +59,7 @@ public class Employee {
         BadgeNumber = badgeNumber;
     }
 
-    public Employee(int id, String name, String email, String birthDay, long badgeNumber, String image) {
+    public Employee(Integer id, String name, String email, String birthDay, long badgeNumber, String image) {
         this.id = id;
         this.name = name;
         this.email = email;
