@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
@@ -15,22 +16,22 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void updateById(int id, Employee emp) {
-       Employee e=this.findById(id);
-       if(e!=null){
-           e.setId(emp.getId());
-           e.setBadgeNumber(emp.getBadgeNumber());
-           e.setBirthDay(emp.getBirthDay());
-           e.setEmail(emp.getEmail());
-           e.setName(emp.getName());
-           e.setImage(emp.getImage());
-           employeeRepository.save(e);
-       }
+        Optional<Employee> e = employeeRepository.findById(id);
+        if (e.isPresent()) {
+            e.get().setId(emp.getId());
+            e.get().setBadgeNumber(emp.getBadgeNumber());
+            e.get().setBirthDay(emp.getBirthDay());
+            e.get().setEmail(emp.getEmail());
+            e.get().setName(emp.getName());
+            e.get().setImage(emp.getImage());
+            employeeRepository.save(e.get());
+        }
     }
 
     @Override
     public Employee findById(int id) {
         Optional<Employee> employee = employeeRepository.findById(id);
-        return employee.isPresent()?employee.get():null;
+        return employee.isPresent() ? employee.get() : null;
     }
 
     @Override
