@@ -1,11 +1,14 @@
 package com.example.demo.model;
 
+import org.springframework.data.rest.core.annotation.RestResource;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
+@RestResource
 public class Employee {
 
     @Id
