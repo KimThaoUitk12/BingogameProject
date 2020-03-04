@@ -13,11 +13,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
-
-
     @Override
     public void updateById(int id, Employee emp) {
-       Employee e=new EmployeeServiceImpl().findById(id);
+       Employee e=this.findById(id);
        if(e!=null){
            e.setId(emp.getId());
            e.setBadgeNumber(emp.getBadgeNumber());
@@ -27,7 +25,6 @@ public class EmployeeServiceImpl implements EmployeeService {
            e.setImage(emp.getImage());
            employeeRepository.save(e);
        }
-
     }
 
     @Override
