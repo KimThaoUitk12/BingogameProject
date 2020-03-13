@@ -1,13 +1,15 @@
 package com.example.demo.service;
 
 import com.example.demo.model.Employee;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public interface EmployeeService {
-    public void  updateById(int id, Employee emp);
-    public Employee findById(int id);
-    public List<Employee> findAll();
-    public void addEmployee(Employee emp);
-    public void delEmployee(int id);
+    void  updateById(int id, Employee emp);
+    Employee findById(int id);
+    List<Employee> findAll();
+    void addEmployee(Employee emp);
+    void delEmployee(int id);
 }

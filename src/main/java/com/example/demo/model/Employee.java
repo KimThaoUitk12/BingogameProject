@@ -17,10 +17,9 @@ public class Employee {
 
     private String name;
     private String email;
-    private String BirthDay;
-    private long BadgeNumber;
+    private String birthDay;
+    private long badgeNumber;
     private String image;
-
 
     public Integer getId() {
         return id;
@@ -47,27 +46,27 @@ public class Employee {
     }
 
     public String getBirthDay() {
-        return BirthDay;
+        return birthDay;
     }
 
     public void setBirthDay(String birthDay) {
-        BirthDay = birthDay;
+        this.birthDay = birthDay;
     }
 
     public long getBadgeNumber() {
-        return BadgeNumber;
+        return badgeNumber;
     }
 
     public void setBadgeNumber(long badgeNumber) {
-        BadgeNumber = badgeNumber;
+        this.badgeNumber = badgeNumber;
     }
 
     public Employee(Integer id, String name, String email, String birthDay, long badgeNumber, String image) {
         this.id = id;
         this.name = name;
         this.email = email;
-        BirthDay = birthDay;
-        BadgeNumber = badgeNumber;
+        this.birthDay = birthDay;
+        this.badgeNumber = badgeNumber;
         this.image = image;
     }
 
