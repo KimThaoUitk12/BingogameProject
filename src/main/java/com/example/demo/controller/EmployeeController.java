@@ -5,6 +5,8 @@ import com.example.demo.service.impl.EmployeeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
+
 @RestController
 public class EmployeeController {
 
@@ -15,6 +17,11 @@ public class EmployeeController {
     public String home(){
         return "Hello World!";
     }
+
+//    @GetMapping("/redirected")
+//    public String redirect(){
+//        return "Page after login";
+//    }
 
     @GetMapping(value = "/welcome")
     public @ResponseBody

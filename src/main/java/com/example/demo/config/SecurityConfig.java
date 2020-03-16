@@ -32,23 +32,28 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication().dataSource(dataSource).usersByUsernameQuery("select username, password, true from user where username=?")
-                .authoritiesByUsernameQuery("select username, role from sec_function where username=?").passwordEncoder(new BCryptPasswordEncoder());
-
-
+                .authoritiesByUsernameQuery("select distinct username, role from user where username=?").passwordEncoder(new BCryptPasswordEncoder());
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+//
+//        http.antMatcher("/**").authorizeRequests().antMatchers("/").permitAll().anyRequest().authenticated()
+//                .and().oauth2Login();
+
+
 
         http.authorizeRequests()
-                .antMatchers(HttpMethod.GET, roleOfRequestService.findById(1).getEndpoint()).hasAnyRole("ADMIN","USER");
+                .antMatchers(HttpMethod.GET, roleOfRequestService.findById(1).getEndpoint())
+                .hasAnyRole(roleOfRequestService.findById(2).getRole(),roleOfRequestService.findById(1).getRole()).and().csrf().disable().httpBasic();
 
-                List<RoleOfRequest> roleOfRequestList = roleOfRequestService.findAll();
-                for (RoleOfRequest roleOfRequest : roleOfRequestList){
-                    http.authorizeRequests()
-                            .antMatchers(HttpMethod.valueOf(roleOfRequest.getMethod()), roleOfRequest.getEndpoint()).hasRole(roleOfRequest.getRole());
-                }
-                http.httpBasic().and()
-                        .authorizeRequests();
+        List<RoleOfRequest> roleOfRequestList = roleOfRequestService.findAll();
+
+        for(int i=2;i<roleOfRequestList.size();i++){
+            http.authorizeRequests()
+                    .antMatchers(HttpMethod.valueOf(roleOfRequestList.get(i).getMethod()), roleOfRequestList.get(i).getEndpoint())
+                    .hasRole(roleOfRequestList.get(i).getRole()).and().csrf().disable().httpBasic();
+        }
+
     }
 }
